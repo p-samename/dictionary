@@ -1,6 +1,5 @@
 'use client';
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Home() {
   const [namu, setNamu] = useState();
