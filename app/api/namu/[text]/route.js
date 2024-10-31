@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { JSDOM } from 'jsdom';
 
-export async function GET(request, { params }) {
+export async function GET() {
   // const { text } = await params;
   // const url = `https://namu.wiki/w/${text}`;
 
