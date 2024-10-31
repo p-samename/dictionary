@@ -1,6 +1,6 @@
 // app/api/namu/route.js
 import { NextResponse } from 'next/server';
-import { JSDOM } from 'jsdom';
+// import { JSDOM } from 'jsdom';
 
 export async function GET() {
   // const { text } = await params;
