@@ -24,8 +24,9 @@ export async function GET(request, { params }) {
     const title = document.querySelector('meta[property="og:title"]')?.getAttribute('content') || 'No title found';
     const img = document.querySelector('meta[property="og:image"]')?.getAttribute('content') || 'No image found';
 
+    console.log(dom);
     // 정상적인 JSON 응답 반환
-    return NextResponse.json({ title, img });
+    return NextResponse.json({ title, img, htmlString });
   } catch (error) {
     console.error('Error fetching data:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
