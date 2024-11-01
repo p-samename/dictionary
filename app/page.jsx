@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Home() {
@@ -20,7 +21,6 @@ export default function Home() {
 
       const data = await response.json();
       setNamu(data);
-      console.log(data.htmlString);
     } catch (err) {
       console.log(err);
       setError('데이터를 불러오는 데 실패했습니다.');
@@ -38,9 +38,11 @@ export default function Home() {
 
       {error && <p>{error}</p>}
 
-      {namu && namu.img && (
-        <div>
-          <img src={namu.img} alt="Fetched content" />
+      {namu && (
+        <div className="w-max h-max">
+          <h1>{namu.title}</h1>
+
+          <Image width={500} height={500} src={namu.img} alt={namu.title} />
         </div>
       )}
     </>

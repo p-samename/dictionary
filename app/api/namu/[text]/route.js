@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 
 export async function GET(request, { params }) {
   const { text } = await params; // URL 경로의 'text' 파라미터를 추출
-  const url = `https://namu.wiki/w/${text}`;
+  const url = `https://terms.naver.com/search.naver?query=%${text}`;
 
   try {
     const response = await fetch(url, {
@@ -21,12 +21,17 @@ export async function GET(request, { params }) {
     const document = dom.window.document;
 
     // 데이터 추출 (예: 페이지 제목과 특정 요소)
-    const title = document.querySelector('meta[property="og:title"]')?.getAttribute('content') || 'No title found';
-    const img = document.querySelector('meta[property="og:image"]')?.getAttribute('content') || 'No image found';
+    const title = document.querySelector('.search_group .desc').innerHTML || 'No title found';
+    const imgUrl = document.querySelector('.image_list a').getAttribute('href') || 'No image found';
 
-    console.log(dom);
+    // Use URLSearchParams to parse the query string
+    const urlParams = new URLSearchParams(imgUrl.split('?')[1]);
+
+    // Extract the imageUrl parameter
+    const img = urlParams.get('imageUrl');
+
     // 정상적인 JSON 응답 반환
-    return NextResponse.json({ title, img, htmlString });
+    return NextResponse.json({ title, img });
   } catch (error) {
     console.error('Error fetching data:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
